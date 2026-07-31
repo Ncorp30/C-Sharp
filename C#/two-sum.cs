@@ -1,12 +1,15 @@
 // Time:  O(n)
 // Space: O(n)
 
+using System.Collections.Generic;
+
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
         Dictionary<int, int> lookup = new Dictionary<int, int>();
         for (var i = 0; i < nums.Length; i++) {
-            if (lookup.ContainsKey(target - nums[i])) {
-                return new int [] { lookup[target - nums[i]], i };
+            var complement = target - nums[i];
+            if (lookup.TryGetValue(complement, out var index)) {
+                return new int [] { index, i };
             }
             lookup[nums[i]] = i;
         }
